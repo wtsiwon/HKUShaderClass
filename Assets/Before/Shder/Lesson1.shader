@@ -3,12 +3,15 @@ Shader "Unlit/lesson1"
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
+		_MossTex("Moss Texture", 2D) = "white" {}
+		_MixTex("Mix Texture", 2D) = "white" {}
 		_MainColor("Main Color", Color) = (1.0,1.0,1.0,1.0)
-		_ShadeValue("ShadeValue", , Range(0,1) == 1
+		_MossSlider("Moss Value", Range(0,1))= 1
 			}
 			SubShader
 			{
-				Tags { "RenderType" = "Opaque" }
+				Tags { "RenderType" = "Transparent" "Queue" = "Transparent"}
+				Blend SrcAlpha OneMinusSrcColor
 				LOD 100
 
 				Pass
@@ -36,8 +39,13 @@ Shader "Unlit/lesson1"
 
 					sampler2D _MainTex;
 					float4 _MainTex_ST;
+					sampler2D _MossTex;
+					sampler2D _MixTex;
+					float4 _MossTex_ST;
 					float4 _MainColor;
-					float ShadeValue;
+					float _MossSlider;
+					
+					
 					v2f vert(appdata v)
 					{
 						v2f o;
@@ -47,19 +55,20 @@ Shader "Unlit/lesson1"
 						return o;
 					}
 
+					
+
 					fixed4 frag(v2f i) : SV_Target
 					{
-						float r = i.uv.x;
-					    float g = i.uv.x;
-					    float b = 0.5 + 0.5 * sin(_Time.x);
- 					    float a = 1;
+						float2 uv = float2(1,1) - i.uv;
+						float4 bricks = tex2D(_MainTex, i.uv);
+						float4 moss = tex2D(_MossTex, uv);
 
-					    float4 yellow = float4(r, g, b, a);
+						float mix = tex2D(_MixTex, uv).r;
+						mix *= _MossSlider;
 
-						float4 color1 = float4(i.uv.x, i.uv.y, 1,1);
-						float4 color2 = float4(1, 0, 1, 1);
-
-						return color1 + color2;
+						//color = bricks * hereGoesMoss + moss * (1.0 - hereComesMoss)
+						float4 result = bricks;
+						return float4(result.rgb, _MossSlider);
 					}
 					ENDCG
 				}

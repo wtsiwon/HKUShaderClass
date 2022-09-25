@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lesson1
-  m_Shader: {fileID: 4800000, guid: 63d87645cc7a7a94f8ff71940336a6d1, type: 3}
+  m_Name: lesson1
+  m_Shader: {fileID: 4800000, guid: 1e31ee463b4367f4582098ede2156397, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -73,7 +73,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.3282733, g: 0.9056604, b: 0.17515129, a: 1}
+    - _Color: {r: 0.07369172, g: 0.58883506, b: 0.6792453, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.8113208, g: 0.14925243, b: 0.756781, a: 1}
   m_BuildTextureStacks: []
