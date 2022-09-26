@@ -68,6 +68,8 @@ Shader "Unlit/lesson1"
 
 						//color = bricks * hereGoesMoss + moss * (1.0 - hereComesMoss)
 						float4 result = bricks;
+
+						clip(mix - _MossSlider);
 						return float4(result.rgb, _MossSlider);
 					}
 					ENDCG
